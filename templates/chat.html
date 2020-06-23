@@ -1,0 +1,172 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  {{ room }}
+{% endblock %}
+
+{% block body %}
+
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='chat.js') }}"></script>
+
+<style>
+
+  /* CSS for chat page */
+  #messages {
+    flex-direction:column;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .message {
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 7px;
+    border-radius: 5px;
+    display: table;
+    max-width: 75%;
+  }
+
+  #info-message {
+    color: grey;
+    background: white;
+    box-shadow: 0px 2px lightgrey;
+    align-self: center;
+  }
+
+  #sent-message {
+    color: white;
+    background: blue;
+    border-top-right-radius: 0px;
+    align-self: flex-end;
+    overflow-wrap: break-word;
+  }
+
+  #received-message {
+    background: white;
+    border: 0.5px solid lightblue;
+    box-shadow: 2px 2px lightblue;
+    border-top-left-radius: 0px;
+  }
+
+
+  .username{
+    display: inline-block;
+    margin: 2.5px;
+    font-weight: bold;
+  }
+
+
+  .time {
+    display: inline-block;
+    margin-left: 2.5px;
+    font-size: 75%;
+  }
+
+  .text {
+    overflow-wrap: break-word;
+    margin: 1px;
+  }
+
+  #write_message {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  #text_button-container {
+    margin-bottom: 30px;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid lightblue;
+  }
+
+
+  #text {
+    display: inline-block;
+    padding: 10px;
+    height: 100%;
+    font-size: 14px;
+    border: none;
+    resize: none;
+    outline: none;
+  }
+
+
+  #send {
+    display: inline-block;
+    padding: 10px;
+    height: 60px;
+    right: 5px;
+  }
+
+</style>
+
+<div id="chat-window">
+
+  <div id="messages" class="col-lg-3 col-sm-12">
+
+      {% for message in messages %}
+
+      {% if message.type == 'info' %}
+
+        <div class="message" id="info-message">
+
+      {% else %}
+
+        {% if username == message.username %}
+
+          <div class="message" id="sent-message">
+
+        {% else %}
+
+          <div class="message" id="received-message">
+
+        {% endif %}
+
+      {% endif %}
+
+            <div class="username">
+              {{ message.username }}
+            </div>
+
+            <div class="time">
+              {{ message.time }}
+            </div>
+
+            <div class="text">
+              {{ message.text }}
+            </div>
+
+      </div>
+
+
+      {% endfor %}
+
+  </div>
+
+  <div class="col-lg-3 col-sm-12" id="write_message">
+    <hr>
+    <div id="text_button-container">
+      <textarea id="text" cols=50 rows=3 placeholder="Type message"></textarea>
+      <input type="image" id="send" src="{{ url_for('static', filename='send.png') }}">
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Rooms
+{% endblock %}
+
+
+
+{% block body %}
+  
+  <script type="text/javascript">
+    localStorage.setItem('USERNAME', '{{ username }}');
+  </script>
+  <div id="room-list">
+    <ul>
+      {% for room in rooms %}
+        <form class="form-group" action="{{ url_for('chat') }}" method="post">
+          <input type="hidden" name="enter_room">
+          <p class="room-name">{{ room }}</p>
+          <button name='room' value="{{ room }}" class="btn btn-primary">Enter room</button>
+          <hr>
+        </form>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+
+  <div id="new-room">
+    <form id="new-room-form" class="form-group" action="{{ url_for('chat') }}" method="post">
+      <input type="hidden" name="create_room">
+      <p style="display:inline-block;">Create a new room:</p>
+      <input id="room_name" type="text" name="room" placeholder="Room name" required>
+      <button class="btn btn-primary">Create and enter</button>
+    </form>
+  </div>
+
+{% endblock %}

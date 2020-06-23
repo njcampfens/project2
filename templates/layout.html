@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='layout.js') }}"></script>
+
+    <style>
+
+      .header {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background: white;
+        margin-bottom: 10px;
+        z-index: 100;
+      }
+
+
+    </style>
+
+  </head>
+  <body>
+
+
+    <div class="header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">ChatApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('rooms_page') }}">Rooms</a>
+            </li>
+            <li class="nav-item">
+              <a id="login_logout" class="nav-link" href="{{ url_for('login_logout') }}">Login</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <nav class="navbar navbar-light bg-light">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <span style="display:none; cursor:pointer;" id="back"><i class="fa fa-arrow-circle-left" style="font-size:20px"></i></span>
+              <span id="title" class="navbar-brand mb-0 h1">Page title</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+
+
+
+    <div class="container-fluid pt-3">
+      {% block body %}
+      {% endblock %}
+    </div>
+
+
+
+  </body>
+</html>
